@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "pDjpp8gvqE6jPhwp71QBpusGamHLj3GmJSS6egCK9Eo=",
+  "Source": "CodeJournal.Api",
+  "BasePath": "_content/CodeJournal.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
