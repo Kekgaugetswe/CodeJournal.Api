@@ -145,3 +145,4 @@
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.pdb
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.genruntimeconfig.cache
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/ref/CodeJournal.Api.dll
+/Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.sourcelink.json
