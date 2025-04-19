@@ -22,4 +22,23 @@ public class CategoryRepository(ApplicationDbContext context) : ICategoryReposit
        return  await context.Categories.ToListAsync();
 
     }
+
+    public async Task<Category?> GetById(Guid id)
+    {
+        return await context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+        
+    }
+
+    public async Task<Category> UpdateAsync(Category category)
+    {
+        var existingCategory = await context.Categories.FirstOrDefaultAsync(x => x.Id == category.Id);
+        if(existingCategory != null)
+        {
+            context.Entry(existingCategory).CurrentValues.SetValues(category);
+            await context.SaveChangesAsync();
+            return category;
+        }
+        return null;
+    }
+
 }
