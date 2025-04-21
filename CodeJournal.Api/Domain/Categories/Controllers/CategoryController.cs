@@ -104,4 +104,27 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
     }
    
 
+   //DELETE: https:/localhost:7180/api/category/{id}
+    [HttpDelete]
+    [Route("{id:Guid}")]
+    public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
+    {
+        var existingCategory = await repository.DeleteAsync(id);
+
+        if (existingCategory == null)
+        {
+            return NotFound();
+        }
+
+        // map domain model to Dto
+        var response = new CategoryDto
+        {
+            Id = existingCategory.Id,
+            Name = existingCategory.Name,
+            UrlHandle = existingCategory.UrlHandle
+        };
+
+        return Ok(response);
+    }
+
 }
