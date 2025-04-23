@@ -1,4 +1,5 @@
 using CodeJournal.Api.DataAccess;
+using CodeJournal.Api.Domain.BlogPosts.Repositories;
 using CodeJournal.Api.Domain.Categories.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

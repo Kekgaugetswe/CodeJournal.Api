@@ -129,6 +129,7 @@
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.csproj.CoreCompileInputs.cache
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.MvcApplicationPartsAssemblyInfo.cs
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.MvcApplicationPartsAssemblyInfo.cache
+/Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.sourcelink.json
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/scopedcss/bundle/CodeJournal.Api.styles.css
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/staticwebassets.build.json
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/staticwebassets.development.json
@@ -145,4 +146,3 @@
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.pdb
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.genruntimeconfig.cache
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/ref/CodeJournal.Api.dll
-/Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.sourcelink.json
