@@ -6,6 +6,7 @@ namespace CodeJournal.Api.Domain.BlogPosts.Repositories;
 public interface IBlogPostRepository
 {
     Task<BlogPost> CreateAsync(BlogPost blogPost);
+    Task<IEnumerable<BlogPost>> GetAllAsync();
 
 
 }

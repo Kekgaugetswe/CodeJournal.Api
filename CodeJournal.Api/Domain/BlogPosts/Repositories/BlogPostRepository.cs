@@ -1,6 +1,7 @@
 using System;
 using CodeJournal.Api.DataAccess;
 using CodeJournal.Api.Domain.BlogPosts.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeJournal.Api.Domain.BlogPosts.Repositories;
 
@@ -19,5 +20,10 @@ public class BlogPostRepository : IBlogPostRepository
         await context.SaveChangesAsync();
         return blogPost;
         
+    }
+
+    public async Task<IEnumerable<BlogPost>> GetAllAsync()
+    {
+       return await context.BlogPosts.ToListAsync();
     }
 }
