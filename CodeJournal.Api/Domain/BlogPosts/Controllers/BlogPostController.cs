@@ -1,6 +1,9 @@
 using CodeJournal.Api.Domain.BlogPosts.Dtos;
 using CodeJournal.Api.Domain.BlogPosts.Models;
 using CodeJournal.Api.Domain.BlogPosts.Repositories;
+using CodeJournal.Api.Domain.Categories;
+using CodeJournal.Api.Domain.Categories.Dtos;
+using CodeJournal.Api.Domain.Categories.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +14,12 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
     public class BlogPostController : ControllerBase
     {
         private readonly IBlogPostRepository _blogPostRepository;
-        public BlogPostController(IBlogPostRepository blogPostRepository)
+        private readonly ICategoryRepository _categoryRepository;
+
+        public BlogPostController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository)
         {
             _blogPostRepository = blogPostRepository;
+            _categoryRepository = categoryRepository;
         }
 
         // POST: {apibaseurl}/api/blogpost
@@ -31,8 +37,17 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
                 UrlHandle = request.UrlHandle,
                 PublishedDate = request.PublishedDate,
                 Author = request.Author,
-                IsVisible = request.IsVisible
+                IsVisible = request.IsVisible,
+                Categories = new List<Category>() // Assuming you have a way to get categories from the request
             };
+
+            foreach(var categoryGuid in request.Categories){
+                var existingCategory = await _categoryRepository.GetByIdAsync(categoryGuid);
+
+                if(existingCategory is not null){
+                    blogPost.Categories.Add(existingCategory);
+                }
+            }
 
             blogPost = await _blogPostRepository.CreateAsync(blogPost);
 
@@ -47,7 +62,12 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
                 UrlHandle = blogPost.UrlHandle,
                 PublishedDate = blogPost.PublishedDate,
                 Author = blogPost.Author,
-                IsVisible = blogPost.IsVisible
+                IsVisible = blogPost.IsVisible,
+                Categories = blogPost.Categories.Select(x => new CategoryDto{
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle
+                }).ToList()
             };
 
             return Ok(response);
@@ -74,7 +94,13 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
                     UrlHandle = blogPost.UrlHandle,
                     PublishedDate = blogPost.PublishedDate,
                     Author = blogPost.Author,
-                    IsVisible = blogPost.IsVisible
+                    IsVisible = blogPost.IsVisible,
+                    Categories = blogPost.Categories.Select(x => new CategoryDto
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        UrlHandle = x.UrlHandle
+                    }).ToList()
                 });
             }
 

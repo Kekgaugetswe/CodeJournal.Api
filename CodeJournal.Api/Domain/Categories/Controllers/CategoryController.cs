@@ -54,7 +54,7 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
 
     public async Task<IActionResult> GetCategoryById([FromRoute]Guid id)
     {
-        var existingCategory = await repository.GetById(id);
+        var existingCategory = await repository.GetByIdAsync(id);
 
         if (existingCategory == null)
         {

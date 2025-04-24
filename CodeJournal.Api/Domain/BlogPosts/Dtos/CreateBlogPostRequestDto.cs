@@ -1,4 +1,5 @@
 using System;
+using CodeJournal.Api.Domain.Categories;
 
 namespace CodeJournal.Api.Domain.BlogPosts.Dtos;
 
@@ -13,5 +14,6 @@ public class CreateBlogPostRequestDto
     public DateTime PublishedDate { get; set; }
     public string Author { get; set; } = string.Empty;
     public bool IsVisible { get; set; }
+    public Guid[] Categories { get; set; }
 
 }

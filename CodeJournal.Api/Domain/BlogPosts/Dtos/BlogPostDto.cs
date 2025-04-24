@@ -1,4 +1,5 @@
 using System;
+using CodeJournal.Api.Domain.Categories.Dtos;
 
 namespace CodeJournal.Api.Domain.BlogPosts.Dtos;
 
@@ -14,5 +15,6 @@ public class BlogPostDto
     public DateTime PublishedDate { get; set; }
     public string Author { get; set; } = string.Empty;
     public bool IsVisible { get; set; }
+    public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
 
 }
