@@ -212,6 +212,44 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
             return Ok(respone);
 
         }
+
+        // DELETE: {apibaseurl}/api/blogpost/{id}
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> DeleteBlogPost([FromRoute] Guid id)
+        {
+            var deletedBlogPost = await _blogPostRepository.DeleteAsync(id);
+            if(deletedBlogPost is null)
+            {
+                return NotFound();
+            }
+            // Convert  domain model to dto
+            var response = new BlogPostDto()
+            {
+                Id = deletedBlogPost.Id,
+                Title = deletedBlogPost.Title,
+                ShortDescription = deletedBlogPost.ShortDescription,
+                Content = deletedBlogPost.Content,
+                FeaturedImageUrl = deletedBlogPost.FeaturedImageUrl,
+                UrlHandle = deletedBlogPost.UrlHandle,
+                PublishedDate = deletedBlogPost.PublishedDate,
+                Author = deletedBlogPost.Author,
+                IsVisible = deletedBlogPost.IsVisible,
+                Categories = deletedBlogPost.Categories.Select(x => new CategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle
+                }).ToList()
+            };
+
+            return Ok(response);
+
+
+
+        }
+
     }
 
 }

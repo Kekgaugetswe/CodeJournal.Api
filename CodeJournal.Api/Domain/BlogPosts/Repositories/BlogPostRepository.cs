@@ -23,6 +23,21 @@ public class BlogPostRepository : IBlogPostRepository
 
     }
 
+    public async Task<BlogPost?> DeleteAsync(Guid id)
+    {
+        await context.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(x => x.Id == id);
+        var exisitingBlogPost = await context.BlogPosts.FindAsync(id);
+        if (exisitingBlogPost is not null)
+        {
+            context.BlogPosts.Remove(exisitingBlogPost);
+            await context.SaveChangesAsync();
+            return exisitingBlogPost;
+        }
+        return null;
+
+
+    }
+
     public async Task<IEnumerable<BlogPost>> GetAllAsync()
     {
         return await context.BlogPosts.Include(x => x.Categories).ToListAsync();
