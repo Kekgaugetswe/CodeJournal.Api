@@ -41,10 +41,12 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
                 Categories = new List<Category>() // Assuming you have a way to get categories from the request
             };
 
-            foreach(var categoryGuid in request.Categories){
+            foreach (var categoryGuid in request.Categories)
+            {
                 var existingCategory = await _categoryRepository.GetByIdAsync(categoryGuid);
 
-                if(existingCategory is not null){
+                if (existingCategory is not null)
+                {
                     blogPost.Categories.Add(existingCategory);
                 }
             }
@@ -63,7 +65,8 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
                 PublishedDate = blogPost.PublishedDate,
                 Author = blogPost.Author,
                 IsVisible = blogPost.IsVisible,
-                Categories = blogPost.Categories.Select(x => new CategoryDto{
+                Categories = blogPost.Categories.Select(x => new CategoryDto
+                {
                     Id = x.Id,
                     Name = x.Name,
                     UrlHandle = x.UrlHandle
@@ -80,7 +83,7 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
         {
             var blogPosts = await _blogPostRepository.GetAllAsync();
 
-            
+
             var response = new List<BlogPostDto>();
             foreach (var blogPost in blogPosts)
             {
@@ -105,6 +108,46 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
             }
 
             return Ok(response);
+        }
+
+        //GET: {apibaseurl}/api/blogpost/{id}
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async  Task<IActionResult> GetBlogPostById( [FromRoute] Guid id)
+        {
+            //get blog post from Repository
+
+
+           var blogPost =  await _blogPostRepository.GetByIdAsync(id);
+
+           if(blogPost is null)
+           {
+               return NotFound();
+           }
+
+        // Convert the domain model to DTO
+           var response = new BlogPostDto()
+           {
+               Id = blogPost.Id,
+               Title = blogPost.Title,
+               ShortDescription = blogPost.ShortDescription,
+               Content = blogPost.Content,
+               FeaturedImageUrl = blogPost.FeaturedImageUrl,
+               UrlHandle = blogPost.UrlHandle,
+               PublishedDate = blogPost.PublishedDate,
+               Author = blogPost.Author,
+               IsVisible = blogPost.IsVisible,
+               Categories = blogPost.Categories.Select(x => new CategoryDto
+               {
+                   Id = x.Id,
+                   Name = x.Name,
+                   UrlHandle = x.UrlHandle
+               }).ToList()
+           };
+
+           return Ok(response);
+
+
         }
     }
 }
