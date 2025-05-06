@@ -20,7 +20,7 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
 
         //POST: {apibaseurl}/api/images
         [HttpPost]
-        public async Task<IActionResult> UploadImage([FromForm] UploadImageModel uploadImageModel , [FromForm] string filename, [FromForm] string title)
+        public async Task<IActionResult> UploadImage([FromForm] UploadImageModel uploadImageModel )
         {
             ValidateFileUpload(uploadImageModel.UploadImage);
             if (ModelState.IsValid)
@@ -28,8 +28,8 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
                 var blogImage = new BlogImage
                 {
                     FileExtension = Path.GetExtension(uploadImageModel.UploadImage.FileName).ToLower(),
-                    FileName = filename,
-                    Title = title,
+                    FileName = uploadImageModel.FileName,
+                    Title = uploadImageModel.Title,
                     DateCreated = DateTime.Now
                 };
 

@@ -5,5 +5,7 @@ namespace CodeJournal.Api.Domain.BlogPosts.Models;
 public class UploadImageModel
 {
     public IFormFile UploadImage { get; set; }
+    public string FileName { get; set; } = string.Empty;
+    public string Title { get; set; } = string.Empty;
 
 }
