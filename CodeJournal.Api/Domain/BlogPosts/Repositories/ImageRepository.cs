@@ -1,6 +1,7 @@
 using System;
 using CodeJournal.Api.DataAccess;
 using CodeJournal.Api.Domain.BlogPosts.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeJournal.Api.Domain.BlogPosts.Repositories;
 
@@ -15,6 +16,11 @@ public class ImageRepository : IImageRepository
         this.webHostEnvironment = webHostEnvironment;
         this.httpContextAccessor = httpContextAccessor;
         this.dbContext = dbContext;
+    }
+
+    public async Task<IEnumerable<BlogImage>> GetAll()
+    {
+       return await dbContext.BlogImages.ToListAsync();
     }
 
     public async Task<BlogImage> Upload(IFormFile file, BlogImage blogImage)

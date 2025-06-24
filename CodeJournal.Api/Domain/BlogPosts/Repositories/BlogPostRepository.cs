@@ -48,6 +48,11 @@ public class BlogPostRepository : IBlogPostRepository
         return await context.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(x => x.Id == id);
     }
 
+    public async Task<BlogPost?> GetByUrlHandleAsync(string urlHandle)
+    {
+        return await context.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(x => x.UrlHandle == urlHandle);
+    }
+
     public async Task<BlogPost?> UdpateAsync(BlogPost blogPost)
     {
         var existingBlogPost = await context.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(x => x.Id == blogPost.Id);

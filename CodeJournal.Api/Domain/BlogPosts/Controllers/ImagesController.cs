@@ -17,24 +17,55 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
             this.imageRepository = imageRepository;
         }
 
+        //Get: {apibaseurl}/api/images
+
+        [HttpGet]   
+
+        public async Task<IActionResult> GetAllImages()
+        {
+            // call image repository to get all images
+
+            var images = await imageRepository.GetAll();
+
+
+            // convert domain Model to DTO
+            var response = new List<BlogImageDto>();
+            foreach (var image in images)
+            {
+                response.Add(new BlogImageDto
+                {
+                    Id = image.Id,
+                    FileName = image.FileName,
+                    FileExtension = image.FileExtension,
+                    Title = image.Title,
+                    Url = image.Url,
+                    DateCreated = image.DateCreated
+                });
+            }
+
+            return Ok(response);
+
+
+        }
+
 
         //POST: {apibaseurl}/api/images
         [HttpPost]
         public async Task<IActionResult> UploadImage([FromForm] UploadImageModel uploadImageModel )
         {
-            ValidateFileUpload(uploadImageModel.UploadImage);
+            ValidateFileUpload(uploadImageModel.File);
             if (ModelState.IsValid)
             {
                 var blogImage = new BlogImage
                 {
-                    FileExtension = Path.GetExtension(uploadImageModel.UploadImage.FileName).ToLower(),
+                    FileExtension = Path.GetExtension(uploadImageModel.File.FileName).ToLower(),
                     FileName = uploadImageModel.FileName,
                     Title = uploadImageModel.Title,
                     DateCreated = DateTime.Now
                 };
 
 
-                blogImage = await imageRepository.Upload(uploadImageModel.UploadImage, blogImage);
+                blogImage = await imageRepository.Upload(uploadImageModel.File, blogImage);
 
                 // convert domain Model to DTO
 

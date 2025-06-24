@@ -150,6 +150,44 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
 
         }
 
+        //Get: {apibaseurl}/api/blogpost/{urlHandle}
+        [HttpGet]
+        [Route("{urlHandle}")]
+        public async Task<IActionResult> GetblogPostByUrlHandle([FromRoute] string urlHandle)
+        {
+            //get blog post from repository by url handle
+
+            var blogPost = await _blogPostRepository.GetByUrlHandleAsync(urlHandle);
+
+            if (blogPost is null)
+            {
+                return NotFound();
+            }
+
+            // Convert the domain model to DTO
+            var response = new BlogPostDto()
+            {
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                ShortDescription = blogPost.ShortDescription,
+                Content = blogPost.Content,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                UrlHandle = blogPost.UrlHandle,
+                PublishedDate = blogPost.PublishedDate,
+                Author = blogPost.Author,
+                IsVisible = blogPost.IsVisible,
+                Categories = blogPost.Categories.Select(x => new CategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle
+                }).ToList()
+            };
+
+            return Ok(response);
+        }
+     
+     
         // PUT: {apibaseurl}/api/blogpost/{id}
         [HttpPut]
         [Route("{id:Guid}")]
