@@ -1,7 +1,6 @@
-using CodeJournal.Api.Domain.Categories;
 using CodeJournal.Api.Domain.Categories.Dtos;
 using CodeJournal.Api.Domain.Categories.Repositories;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeJournal.Api.Domain.Categories.Controllers;
@@ -26,25 +25,28 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
         return Ok(response);
     }
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetCategory()
     {
         var categories = await repository.GetAllAsync();
 
-         //map domain model to Dto
+        //map domain model to Dto
 
-         var response = new List<CategoryDto>();
+        var response = new List<CategoryDto>();
 
-         foreach( var category in categories){
+        foreach (var category in categories)
+        {
 
-            response.Add(new CategoryDto{
-                Id = category.Id,   
+            response.Add(new CategoryDto
+            {
+                Id = category.Id,
                 Name = category.Name,
                 UrlHandle = category.UrlHandle
             });
 
-         }
+        }
 
-         return Ok(response);
+        return Ok(response);
 
     }
 

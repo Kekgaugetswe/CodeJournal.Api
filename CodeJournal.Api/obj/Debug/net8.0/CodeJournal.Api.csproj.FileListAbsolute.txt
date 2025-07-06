@@ -9,6 +9,8 @@
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/bin/Debug/net8.0/Azure.Core.dll
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/bin/Debug/net8.0/Azure.Identity.dll
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/bin/Debug/net8.0/Humanizer.dll
+/Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/bin/Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/bin/Debug/net8.0/Microsoft.CodeAnalysis.dll
 /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/bin/Debug/net8.0/Microsoft.CodeAnalysis.CSharp.dll
