@@ -1,4 +1,5 @@
 using CodeJournal.Api.Domain.AccountManagement.Dtos;
+using CodeJournal.Api.Domain.AccountManagement.Respositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,7 @@ namespace CodeJournal.Api.Domain.AccountManagement.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AuthController(UserManager<IdentityUser> userManager) : ControllerBase
+public class AuthController(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository) : ControllerBase
 {
 
 
@@ -23,15 +24,17 @@ public class AuthController(UserManager<IdentityUser> userManager) : ControllerB
             if (checkPasswordResult)
             {
 
-                var reles = await userManager.GetRolesAsync(identityUser);
+                var roles = await userManager.GetRolesAsync(identityUser);
 
                 //Create a Token and response
+
+                var jwtToken = tokenRepository.CreateToken(identityUser, roles.ToList());
 
                 var response = new LoginResponseDto()
                 {
                     Email = request.Email,
-                    Roles = reles.ToList(),
-                    Token = ""
+                    Roles = roles.ToList(),
+                    Token = jwtToken
                 };
 
                 return Ok(response);

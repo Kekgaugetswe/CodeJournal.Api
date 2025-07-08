@@ -1,5 +1,6 @@
 using System.Text;
 using CodeJournal.Api.DataAccess;
+using CodeJournal.Api.Domain.AccountManagement.Respositories;
 using CodeJournal.Api.Domain.BlogPosts.Repositories;
 using CodeJournal.Api.Domain.Categories.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 builder.Services.AddScoped<IImageRepository, ImageRepository>();
+builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 builder.Services.AddIdentityCore<IdentityUser>()
 .AddRoles<IdentityRole>()
