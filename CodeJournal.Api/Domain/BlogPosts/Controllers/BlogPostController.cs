@@ -4,6 +4,7 @@ using CodeJournal.Api.Domain.BlogPosts.Repositories;
 using CodeJournal.Api.Domain.Categories;
 using CodeJournal.Api.Domain.Categories.Dtos;
 using CodeJournal.Api.Domain.Categories.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,7 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
 
         // POST: {apibaseurl}/api/blogpost
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CreateBlogPost(CreateBlogPostRequestDto request)
         {
             // map dto to domain model 
@@ -146,8 +148,6 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
             };
 
             return Ok(response);
-
-
         }
 
         //Get: {apibaseurl}/api/blogpost/{urlHandle}
@@ -186,11 +186,12 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
 
             return Ok(response);
         }
-     
-     
+
+
         // PUT: {apibaseurl}/api/blogpost/{id}
         [HttpPut]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> UpdateBlogPostById([FromRoute] Guid id, [FromBody] UpdateBlogPostRequestDto request)
         {
 
@@ -255,10 +256,11 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
 
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteBlogPost([FromRoute] Guid id)
         {
             var deletedBlogPost = await _blogPostRepository.DeleteAsync(id);
-            if(deletedBlogPost is null)
+            if (deletedBlogPost is null)
             {
                 return NotFound();
             }

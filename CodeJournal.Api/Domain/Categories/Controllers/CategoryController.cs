@@ -10,6 +10,7 @@ namespace CodeJournal.Api.Domain.Categories.Controllers;
 public class CategoryController(ICategoryRepository repository) : ControllerBase
 {
     [HttpPost]
+    [Authorize(Roles = "Writer")]
     public async Task<IActionResult> CreateCategory(CreateCategoryRequestDto request)
     {
         // map dto to domain model 
@@ -25,7 +26,6 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
         return Ok(response);
     }
     [HttpGet]
-    [Authorize]
     public async Task<IActionResult> GetCategory()
     {
         var categories = await repository.GetAllAsync();
@@ -53,8 +53,7 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
     //Get: https:/localhost:7180/api/category/{id}
     [HttpGet]
     [Route("{id:Guid}")]
-
-    public async Task<IActionResult> GetCategoryById([FromRoute]Guid id)
+    public async Task<IActionResult> GetCategoryById([FromRoute] Guid id)
     {
         var existingCategory = await repository.GetByIdAsync(id);
 
@@ -75,10 +74,11 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
         return Ok(response);
     }
 
-// PUT: https:/localhost:7180/api/category/{id}
-    [HttpPut] 
+    // PUT: https:/localhost:7180/api/category/{id}
+    [HttpPut]
     [Route("{id:Guid}")]
-    public async Task<IActionResult> UpdateCategory([FromRoute] Guid id,  UpdateCategoryRequestDto request)
+    [Authorize(Roles = "Writer")]
+    public async Task<IActionResult> UpdateCategory([FromRoute] Guid id, UpdateCategoryRequestDto request)
     {
         //convert Dto to domain model
 
@@ -90,7 +90,7 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
         };
         category = await repository.UpdateAsync(category);
 
-        if(category == null)
+        if (category == null)
         {
             return NotFound();
         }
@@ -102,13 +102,14 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
             UrlHandle = category.UrlHandle
         };
         return Ok(response);
-       
-    }
-   
 
-   //DELETE: https:/localhost:7180/api/category/{id}
+    }
+
+
+    //DELETE: https:/localhost:7180/api/category/{id}
     [HttpDelete]
     [Route("{id:Guid}")]
+    [Authorize(Roles = "Writer")]
     public async Task<IActionResult> DeleteCategory([FromRoute] Guid id)
     {
         var existingCategory = await repository.DeleteAsync(id);
