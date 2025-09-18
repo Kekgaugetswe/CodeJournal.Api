@@ -6,7 +6,7 @@ namespace CodeJournal.Api.Domain.Categories.Repositories;
 public interface ICategoryRepository
 {
     Task<Category> CreateCategoryAsync(Category category);
-    Task<IEnumerable<Category>> GetAllAsync();
+    Task<IEnumerable<Category>> GetAllAsync(string? query = null);
 
     Task<Category?> GetByIdAsync(Guid id);
 

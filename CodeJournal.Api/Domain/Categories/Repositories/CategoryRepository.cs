@@ -19,9 +19,24 @@ public class CategoryRepository(ApplicationDbContext context) : ICategoryReposit
 
 
 
-    public async Task<IEnumerable<Category>> GetAllAsync()
+    public async Task<IEnumerable<Category>> GetAllAsync(string? query = null)
     {
-        return await context.Categories.ToListAsync();
+
+        //Query
+
+        var categories = context.Categories.AsQueryable();
+
+        // Filtering
+        if (string.IsNullOrWhiteSpace(query) == false)
+        {
+            categories = categories.Where(x => x.Name.Contains(query));
+        }
+        // sorting
+
+        // pagination
+        return await categories.ToListAsync();
+
+
 
     }
 
@@ -42,7 +57,6 @@ public class CategoryRepository(ApplicationDbContext context) : ICategoryReposit
         }
         return null;
     }
-
 
     public async Task<Category> DeleteAsync(Guid id)
     {

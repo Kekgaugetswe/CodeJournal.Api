@@ -25,10 +25,12 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
 
         return Ok(response);
     }
+  
+  
     [HttpGet]
-    public async Task<IActionResult> GetCategory()
+    public async Task<IActionResult> GetCategory([FromQuery] string? query )
     {
-        var categories = await repository.GetAllAsync();
+        var categories = await repository.GetAllAsync(query);
 
         //map domain model to Dto
 
