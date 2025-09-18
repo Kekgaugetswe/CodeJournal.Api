@@ -26,11 +26,11 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
         return Ok(response);
     }
   
-  
+    // GET: https://localhost:7180/api/category?query=html&sortBy=name&sortDirection=desc
     [HttpGet]
-    public async Task<IActionResult> GetCategory([FromQuery] string? query )
+    public async Task<IActionResult> GetCategory([FromQuery] string? query, [FromQuery] string? sortBy, [FromQuery] string? sortDirection )
     {
-        var categories = await repository.GetAllAsync(query);
+        var categories = await repository.GetAllAsync(query, sortBy, sortDirection);
 
         //map domain model to Dto
 
