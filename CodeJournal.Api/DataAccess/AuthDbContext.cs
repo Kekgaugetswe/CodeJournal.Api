@@ -74,3 +74,4 @@ public class AuthDbContext : IdentityDbContext
         builder.Entity<IdentityUserRole<string>>().HasData(adminRoles);
     }
 }
+ 
