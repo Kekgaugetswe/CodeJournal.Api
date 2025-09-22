@@ -25,10 +25,10 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
 
         return Ok(response);
     }
-  
+
     // GET: https://localhost:7180/api/category?query=html&sortBy=name&sortDirection=desc
     [HttpGet]
-    public async Task<IActionResult> GetCategory([FromQuery] string? query, [FromQuery] string? sortBy, [FromQuery] string? sortDirection, [FromQuery] int? pageNumber, [FromQuery] int? pageSize )
+    public async Task<IActionResult> GetCategory([FromQuery] string? query, [FromQuery] string? sortBy, [FromQuery] string? sortDirection, [FromQuery] int? pageNumber, [FromQuery] int? pageSize)
     {
         var categories = await repository.GetAllAsync(query, sortBy, sortDirection, pageNumber, pageSize);
 
@@ -130,6 +130,18 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
         };
 
         return Ok(response);
+    }
+
+    //GET: https://locahost:7226/api/categories/count
+    [HttpGet]
+    [Route("count")]
+    // [Authorize(Roles = "Writer")]
+    public async Task<IActionResult> GetCategoriesTotal()
+    {
+        var count = await repository.GetCount();
+
+        return Ok(count);
+        
     }
 
 }

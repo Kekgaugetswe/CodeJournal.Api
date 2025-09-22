@@ -98,4 +98,8 @@ public class CategoryRepository(ApplicationDbContext context) : ICategoryReposit
         return existingCategory;
     }
 
+    public async Task<int> GetCount()
+    {
+        return await context.Categories.CountAsync();
+    }
 }
