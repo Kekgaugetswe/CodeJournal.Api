@@ -28,9 +28,9 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
   
     // GET: https://localhost:7180/api/category?query=html&sortBy=name&sortDirection=desc
     [HttpGet]
-    public async Task<IActionResult> GetCategory([FromQuery] string? query, [FromQuery] string? sortBy, [FromQuery] string? sortDirection )
+    public async Task<IActionResult> GetCategory([FromQuery] string? query, [FromQuery] string? sortBy, [FromQuery] string? sortDirection, [FromQuery] int? pageNumber, [FromQuery] int? pageSize )
     {
-        var categories = await repository.GetAllAsync(query, sortBy, sortDirection);
+        var categories = await repository.GetAllAsync(query, sortBy, sortDirection, pageNumber, pageSize);
 
         //map domain model to Dto
 
