@@ -16,11 +16,13 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
     {
         private readonly IBlogPostRepository _blogPostRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IBlogPostLikeRepository _blogPostLikeRepository;
 
-        public BlogPostController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository)
+        public BlogPostController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository, IBlogPostLikeRepository blogPostLikeRepository)
         {
             _blogPostRepository = blogPostRepository;
             _categoryRepository = categoryRepository;
+            _blogPostLikeRepository = blogPostLikeRepository;
         }
 
         // POST: {apibaseurl}/api/blogpost
@@ -158,11 +160,13 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
             //get blog post from repository by url handle
 
             var blogPost = await _blogPostRepository.GetByUrlHandleAsync(urlHandle);
+            
 
             if (blogPost is null)
             {
                 return NotFound();
             }
+            var totalLikes = await _blogPostLikeRepository.GetTotalLikesForBlog(blogPost.Id);
 
             // Convert the domain model to DTO
             var response = new BlogPostDto()
@@ -181,7 +185,8 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
                     Id = x.Id,
                     Name = x.Name,
                     UrlHandle = x.UrlHandle
-                }).ToList()
+                }).ToList(),
+                TotalLikes = totalLikes
             };
 
             return Ok(response);

@@ -108,6 +108,25 @@ namespace CodeJournal.Api.Migrations
                     b.ToTable("BlogPosts");
                 });
 
+            modelBuilder.Entity("CodeJournal.Api.Domain.BlogPosts.Models.BlogPostLike", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BlogPostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.ToTable("BlogPostLike");
+                });
+
             modelBuilder.Entity("CodeJournal.Api.Domain.Categories.Category", b =>
                 {
                     b.Property<Guid>("Id")
@@ -140,6 +159,20 @@ namespace CodeJournal.Api.Migrations
                         .HasForeignKey("CategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CodeJournal.Api.Domain.BlogPosts.Models.BlogPostLike", b =>
+                {
+                    b.HasOne("CodeJournal.Api.Domain.BlogPosts.Models.BlogPost", null)
+                        .WithMany("Likes")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CodeJournal.Api.Domain.BlogPosts.Models.BlogPost", b =>
+                {
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }
