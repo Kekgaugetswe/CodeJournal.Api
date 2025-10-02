@@ -34,7 +34,8 @@ public class AuthController(UserManager<IdentityUser> userManager, ITokenReposit
                 {
                     Email = request.Email,
                     Roles = roles.ToList(),
-                    Token = jwtToken
+                    Token = jwtToken,
+                    UserId = identityUser.Id
                 };
 
                 return Ok(response);

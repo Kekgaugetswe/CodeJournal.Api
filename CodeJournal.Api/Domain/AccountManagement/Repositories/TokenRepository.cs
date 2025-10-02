@@ -14,7 +14,8 @@ public class TokenRepository( IConfiguration configuration) : ITokenRepository
         // Create claims
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Email, user.Email)
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.NameIdentifier, user.Id)
 
         };
 
