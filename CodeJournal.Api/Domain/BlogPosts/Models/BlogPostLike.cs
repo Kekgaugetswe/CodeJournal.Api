@@ -6,6 +6,10 @@ public class BlogPostLike
 {
     public Guid Id { get; set; }
     public Guid BlogPostId { get; set; }
-    public Guid UserId { get; set; }
+    public string UserId { get; set; } = string.Empty;
+    public DateTime LikedAt { get; set; }
+    public BlogPost BlogPost { get; set; }
+
+
 
 }

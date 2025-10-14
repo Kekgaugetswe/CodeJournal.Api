@@ -6,6 +6,7 @@ using CodeJournal.Api.Domain.Categories.Dtos;
 using CodeJournal.Api.Domain.Categories.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeJournal.Api.Domain.BlogPosts.Controllers
@@ -17,12 +18,16 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
         private readonly IBlogPostRepository _blogPostRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IBlogPostLikeRepository _blogPostLikeRepository;
+        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public BlogPostController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository, IBlogPostLikeRepository blogPostLikeRepository)
+        public BlogPostController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository, IBlogPostLikeRepository blogPostLikeRepository, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
         {
             _blogPostRepository = blogPostRepository;
             _categoryRepository = categoryRepository;
             _blogPostLikeRepository = blogPostLikeRepository;
+            this.signInManager = signInManager;
+            this.userManager = userManager;
         }
 
         // POST: {apibaseurl}/api/blogpost
@@ -155,18 +160,28 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
         //Get: {apibaseurl}/api/blogpost/{urlHandle}
         [HttpGet]
         [Route("{urlHandle}")]
-        public async Task<IActionResult> GetblogPostByUrlHandle([FromRoute] string urlHandle)
+        public async Task<IActionResult> GetblogPostByUrlHandle([FromRoute] string urlHandle, string? userId = null)
         {
             //get blog post from repository by url handle
 
             var blogPost = await _blogPostRepository.GetByUrlHandleAsync(urlHandle);
-            
+
 
             if (blogPost is null)
             {
                 return NotFound();
             }
+            bool liked = false;
+            
+            if (!string.IsNullOrEmpty(userId))
+            {
+                var likes = await _blogPostLikeRepository.GetLikesForBlog(blogPost.Id);
+
+                liked = likes.Any(x => x.UserId == userId);
+
+            }
             var totalLikes = await _blogPostLikeRepository.GetTotalLikesForBlog(blogPost.Id);
+
 
             // Convert the domain model to DTO
             var response = new BlogPostDto()
@@ -186,7 +201,8 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
                     Name = x.Name,
                     UrlHandle = x.UrlHandle
                 }).ToList(),
-                TotalLikes = totalLikes
+                TotalLikes = totalLikes,
+                Liked = liked
             };
 
             return Ok(response);

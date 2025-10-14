@@ -15,16 +15,27 @@ public class BlogPostLikeRepository : IBlogPostLikeRepository
         this.dbContext = dbContext;
     }
 
-    public async Task AddLikeForBlog(AddBlogPostRequestDto request)
+    public async Task<bool> AddLikeForBlog(AddBlogPostRequestDto request)
     {
+
+        var exists = await dbContext.BlogPostLike.AnyAsync(l => l.BlogPostId == request.BlogPostId && l.UserId == request.UserId);
+        if (exists)
+            return false;
         var like = new BlogPostLike
         {
             Id = Guid.NewGuid(),
             BlogPostId = request.BlogPostId,
-            UserId = request.UserId
+            UserId = request.UserId,
+            LikedAt = DateTime.UtcNow
         };
         await dbContext.AddAsync(like);
         await dbContext.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<IEnumerable<BlogPostLike>> GetLikesForBlog(Guid blogPostId)
+    {
+        return await dbContext.BlogPostLike.Where(x => x.BlogPostId == blogPostId).ToListAsync();
     }
 
     public async Task<int> GetTotalLikesForBlog(Guid BlogPostId)

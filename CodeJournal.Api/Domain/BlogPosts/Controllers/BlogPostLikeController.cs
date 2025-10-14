@@ -23,8 +23,18 @@ public class BlogPostLikeController : ControllerBase
     public async Task<IActionResult> AddLike([FromBody] AddBlogPostRequestDto request)
     {
 
-        await _blogPostLikeRepository.AddLikeForBlog(request);
-        return Ok();
+        var added = await _blogPostLikeRepository.AddLikeForBlog(request);
+        if (!added)
+            return Conflict(new { message = "User already liked this post" });
+        return Ok(new { message = "Like Added." });
+    }
+
+    [HttpGet]
+    [Route("{blogPostId:Guid}/totalLikes")]
+    public async Task<IActionResult> GetTotalLikes([FromRoute] Guid blogPostId)
+    {
+        var totalLikes = await _blogPostLikeRepository.GetTotalLikesForBlog(blogPostId);
+        return Ok(totalLikes);
     }
  
 }

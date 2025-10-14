@@ -18,4 +18,6 @@ public class BlogPostDto
     public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
     public int TotalLikes { get; set; }
 
+    public bool Liked { get; set; }
+
 }

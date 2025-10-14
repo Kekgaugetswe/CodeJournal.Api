@@ -14,4 +14,21 @@ public class ApplicationDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<BlogImage> BlogImages { get; set; }
     public DbSet<BlogPostLike> BlogPostLike { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<BlogPostLike>()
+                .HasIndex(l => new { l.BlogPostId, l.UserId })
+                .IsUnique();
+
+         modelBuilder.Entity<BlogPostLike>()
+                .HasOne(l => l.BlogPost)
+                .WithMany(p => p.Likes)
+                .HasForeignKey(l => l.BlogPostId)
+                .OnDelete(DeleteBehavior.Cascade);
+    }
+
+    
 }
