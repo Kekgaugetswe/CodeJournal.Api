@@ -20,14 +20,14 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
         private readonly IBlogPostLikeRepository _blogPostLikeRepository;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly IBlogPostCommentRepository blogPostCommentRepository;
 
-        public BlogPostController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository, IBlogPostLikeRepository blogPostLikeRepository, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        public BlogPostController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository, IBlogPostLikeRepository blogPostLikeRepository, IBlogPostCommentRepository blogPostCommentRepository)
         {
             _blogPostRepository = blogPostRepository;
             _categoryRepository = categoryRepository;
             _blogPostLikeRepository = blogPostLikeRepository;
-            this.signInManager = signInManager;
-            this.userManager = userManager;
+            this.blogPostCommentRepository = blogPostCommentRepository;
         }
 
         // POST: {apibaseurl}/api/blogpost
@@ -172,7 +172,7 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
                 return NotFound();
             }
             bool liked = false;
-            
+
             if (!string.IsNullOrEmpty(userId))
             {
                 var likes = await _blogPostLikeRepository.GetLikesForBlog(blogPost.Id);
@@ -311,6 +311,39 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
 
         }
 
+        [HttpPost]
+        [Route("comment")]
+        [Authorize]
+        public async Task<IActionResult> AddComment([FromBody] AddBlogPostCommentDto request)
+        {
+            if (request == null || request.BlogPostId == Guid.Empty)
+                return BadRequest("Invalid comment data.");
+
+
+            var comment = new BlogPostComment()
+            {
+                BlogPostId = request.BlogPostId,
+                UserId = request.UserId,
+                Description = request.Description,
+                DateAdded = DateTime.UtcNow
+
+            };
+            var createdComment = await blogPostCommentRepository.AddAsync(comment);
+            var response = new BlogPostCommentDto
+            {
+                Id = createdComment.Id,
+                BlogPostId = createdComment.BlogPostId,
+                UserId = createdComment.UserId,
+                Description = createdComment.Description,
+                DateAdded = createdComment.DateAdded
+            };
+
+            return Ok(response);
+
+        }
+
+
     }
+
 
 }

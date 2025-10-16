@@ -14,6 +14,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Category> Categories { get; set; }
     public DbSet<BlogImage> BlogImages { get; set; }
     public DbSet<BlogPostLike> BlogPostLike { get; set; }
+    public DbSet<BlogPostComment> BlogPostComment { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

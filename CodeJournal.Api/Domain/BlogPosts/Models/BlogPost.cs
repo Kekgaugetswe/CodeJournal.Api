@@ -16,7 +16,9 @@ public class BlogPost
     public string Author { get; set; } = string.Empty;
     public bool IsVisible { get; set; }
 
+    //navigation properties
     public ICollection<Category> Categories { get; set; }
     public ICollection<BlogPostLike> Likes { get; set; }
-    
+    public ICollection<BlogPostComment> Comments { get; set; }
+
 }
