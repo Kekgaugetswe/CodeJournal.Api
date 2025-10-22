@@ -22,12 +22,13 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
         private readonly UserManager<IdentityUser> userManager;
         private readonly IBlogPostCommentRepository blogPostCommentRepository;
 
-        public BlogPostController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository, IBlogPostLikeRepository blogPostLikeRepository, IBlogPostCommentRepository blogPostCommentRepository)
+        public BlogPostController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository, IBlogPostLikeRepository blogPostLikeRepository, IBlogPostCommentRepository blogPostCommentRepository, UserManager<IdentityUser> userManager)
         {
             _blogPostRepository = blogPostRepository;
             _categoryRepository = categoryRepository;
             _blogPostLikeRepository = blogPostLikeRepository;
             this.blogPostCommentRepository = blogPostCommentRepository;
+            this.userManager = userManager;
         }
 
         // POST: {apibaseurl}/api/blogpost
@@ -182,7 +183,6 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
             }
             var totalLikes = await _blogPostLikeRepository.GetTotalLikesForBlog(blogPost.Id);
 
-
             // Convert the domain model to DTO
             var response = new BlogPostDto()
             {
@@ -207,7 +207,28 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
 
             return Ok(response);
         }
+        [HttpGet]
+        [Route("{blogPostId:Guid}/comments")]
+        public async Task<IActionResult> GetBlogPostComments([FromRoute] Guid blogPostId)
+        {
+            var comments = await blogPostCommentRepository.GetAllAsync(blogPostId);
 
+            var response = new List<BlogCommentDto>();
+
+            foreach (var comment in comments)
+            {
+                var user = await userManager.FindByIdAsync(comment.UserId.ToString());
+
+                response.Add(new BlogCommentDto
+                {
+                    Description = comment.Description,
+                    DateAdded = comment.DateAdded,
+                    UserName = user?.UserName ?? "Unknown"
+                });
+            }
+
+            return Ok(response);
+        }
 
         // PUT: {apibaseurl}/api/blogpost/{id}
         [HttpPut]
@@ -325,7 +346,7 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
                 BlogPostId = request.BlogPostId,
                 UserId = request.UserId,
                 Description = request.Description,
-                DateAdded = DateTime.UtcNow
+                DateAdded = DateTimeOffset.UtcNow
 
             };
             var createdComment = await blogPostCommentRepository.AddAsync(comment);
@@ -341,7 +362,6 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
             return Ok(response);
 
         }
-
 
     }
 

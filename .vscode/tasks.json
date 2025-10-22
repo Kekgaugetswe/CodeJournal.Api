@@ -1,0 +1,22 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "msbuild",
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build",
+			"label": "Build: CodeJournal.Api.csproj",
+			"detail": "Build the CodeJournal.Api.csproj project using dotnet build"
+		},
+		{
+			"type": "dotnet",
+			"task": "build /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/CodeJournal.Api.csproj",
+			"file": "/Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/CodeJournal.Api.csproj",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "dotnet: build /Users/kekgaugetswesebati/Development/Projects/Personal/CodeJournal.Api/CodeJournal.Api/CodeJournal.Api.csproj"
+		}
+	]
+}

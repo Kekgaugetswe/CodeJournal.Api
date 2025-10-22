@@ -20,4 +20,9 @@ public class BlogPostCommentRepository : IBlogPostCommentRepository
 
         return blogPostComment;
     }
+
+    public async Task<IEnumerable<BlogPostComment>> GetAllAsync(Guid blogPostId)
+    {
+        return await dbContext.BlogPostComment.OrderByDescending(c=> c.DateAdded).Where(x => x.BlogPostId == blogPostId).ToListAsync();
+    }
 }
