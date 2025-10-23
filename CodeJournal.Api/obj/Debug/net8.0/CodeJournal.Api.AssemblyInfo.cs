@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodeJournal.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4f644d72feb954b7a3f0cec4b59a110f0e290e5b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b2d48391b20cea5d14c444c3c8a229b289e12dfb")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodeJournal.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodeJournal.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

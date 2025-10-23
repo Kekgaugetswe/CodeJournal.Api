@@ -1,0 +1,10 @@
+using System;
+using Microsoft.AspNetCore.Identity;
+
+namespace CodeJournal.Api.Domain.AccountManagement.Repositories;
+
+public interface IUserRepository
+{
+    Task<IEnumerable<IdentityUser>> GetAllAsync();
+
+}

@@ -1,5 +1,6 @@
 using System.Text;
 using CodeJournal.Api.DataAccess;
+using CodeJournal.Api.Domain.AccountManagement.Repositories;
 using CodeJournal.Api.Domain.AccountManagement.Respositories;
 using CodeJournal.Api.Domain.BlogPosts.Repositories;
 using CodeJournal.Api.Domain.Categories.Repositories;
@@ -19,6 +20,7 @@ builder.Services.AddScoped<IImageRepository, ImageRepository>();
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IBlogPostLikeRepository, BlogPostLikeRepository>();
 builder.Services.AddScoped<IBlogPostCommentRepository, BlogPostCommentRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddIdentityCore<IdentityUser>()
 .AddRoles<IdentityRole>()
