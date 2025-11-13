@@ -9,10 +9,12 @@ namespace CodeJournal.Api.Domain.AccountManagement.Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly AuthDbContext authDbContext;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public UserRepository(AuthDbContext authDbContext)
+    public UserRepository(AuthDbContext authDbContext, UserManager<IdentityUser> userManager)
     {
         this.authDbContext = authDbContext;
+        _userManager = userManager;
     }
     public async Task<IEnumerable<IdentityUser>> GetAllAsync()
     {
@@ -25,5 +27,21 @@ public class UserRepository : IUserRepository
         }
 
         return users;
+    }
+
+    public async Task<bool> Add(IdentityUser user, string password, List<string> roles)
+    {
+       var identityResults= await _userManager.CreateAsync(user, password);
+       if (identityResults.Succeeded)
+       {
+          identityResults= await _userManager.AddToRolesAsync(user, roles);
+
+          if (identityResults.Succeeded)
+          {
+              return true;
+          }
+       }
+       return false;    
+       
     }
 }
