@@ -65,5 +65,14 @@ namespace CodeJournal.Api.Domain.AccountManagement.Controllers
 //save
             return Ok(result);
         }
+
+        [HttpDelete]
+        [Route("delete/{userId:guid}")]
+        [Authorize(Roles = "Writer")]
+        public async Task<IActionResult> Delete(Guid userId)
+        {
+            await userRepository.Delete(userId);
+            return Ok();
+        }
     }
 }

@@ -8,5 +8,5 @@ public interface IUserRepository
     Task<IEnumerable<IdentityUser>> GetAllAsync();
     
     Task<bool> Add(IdentityUser user, string password, List<string> roles);
-
+    Task Delete(Guid userId);
 }
