@@ -12,7 +12,7 @@ on:
 
 env:
   DOCKER_USERNAME: kekgaugetswe
-  REPO: Kekgaugetswe/CodeJournal.Api
+  REPO: kekgaugetswe/codejournal.api
   
 jobs:
   build:
