@@ -1,5 +1,6 @@
 using System.Text;
 using CodeJournal.Api.DataAccess;
+using CodeJournal.Api.Domain.AccountManagement.Models;
 using CodeJournal.Api.Domain.AccountManagement.Repositories;
 using CodeJournal.Api.Domain.AccountManagement.Respositories;
 using CodeJournal.Api.Domain.BlogPosts.Repositories;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,9 +24,9 @@ builder.Services.AddScoped<IBlogPostLikeRepository, BlogPostLikeRepository>();
 builder.Services.AddScoped<IBlogPostCommentRepository, BlogPostCommentRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-builder.Services.AddIdentityCore<IdentityUser>()
+builder.Services.AddIdentityCore<ApplicationUser>()
 .AddRoles<IdentityRole>()
-.AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("CodeJournal")
+.AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>("CodeJournal")
 .AddEntityFrameworkStores<AuthDbContext>()
 .AddDefaultTokenProviders();
 
@@ -58,27 +60,32 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddOpenApi();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CodeJournalConnectionString"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("CodeJournalConnectionString"));
 });
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CodeJournalConnectionString"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("CodeJournalConnectionString"));
 });
 
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseSwagger();
-app.UseSwaggerUI();
-    app.UseHttpsRedirection();
+
+app.MapOpenApi();
+app.MapScalarApiReference(options =>
+{
+    options.Theme = ScalarTheme.BluePlanet;
+    options.DefaultHttpClient = new(ScalarTarget.CSharp, ScalarClient.RestSharp);
+});
+    
 if (app.Environment.IsDevelopment())
 {
+app.UseHttpsRedirection();
 }
 
 app.UseCors(options =>

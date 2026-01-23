@@ -1,4 +1,5 @@
 using CodeJournal.Api.Domain.AccountManagement.Dtos;
+using CodeJournal.Api.Domain.AccountManagement.Models;
 using CodeJournal.Api.Domain.AccountManagement.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -44,8 +45,10 @@ namespace CodeJournal.Api.Domain.AccountManagement.Controllers
         // [Authorize]
         public async Task<IActionResult> AddUser([FromBody] AddUserDto dto)
         {
-            var identityUser = new IdentityUser
+            var identityUser = new ApplicationUser()
             {
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
                 UserName = dto.UserName,
                 Email = dto.Email,
             };

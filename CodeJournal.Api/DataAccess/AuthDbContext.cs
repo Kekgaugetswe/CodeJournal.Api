@@ -1,11 +1,12 @@
 using System;
+using CodeJournal.Api.Domain.AccountManagement.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CodeJournal.Api.DataAccess;
 
-public class AuthDbContext : IdentityDbContext
+public class AuthDbContext : IdentityDbContext<ApplicationUser>
 {
     public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
     {
@@ -43,18 +44,21 @@ public class AuthDbContext : IdentityDbContext
         // Create a default admin user
         var adminUserId = "dbbe523f-8929-44e0-b440-32ebd86f526d";
 
-        var admin = new IdentityUser()
+        var admin = new ApplicationUser()
         {
             Id = adminUserId,
             UserName = "admin@codejournalx.com",
             NormalizedUserName = "admin@codejournalx.com".ToUpper(),
             Email = "admin@codejournalx.com",
             NormalizedEmail = "admin@codejournalx.com".ToUpper(),
+            
+            FirstName = "Admin",
+            LastName = "Admin",
 
         };
-        admin.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(admin, "Admin@123");
+        admin.PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(admin, "Admin@123");
 
-        builder.Entity<IdentityUser>().HasData(admin);
+        builder.Entity<ApplicationUser>().HasData(admin);
 
         //give Roles to the admin user
         var adminRoles = new List<IdentityUserRole<string>>()

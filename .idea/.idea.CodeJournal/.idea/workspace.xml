@@ -9,9 +9,128 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bda26c94-c97e-450f-9eb9-323566aae83f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Dtos/AssignRoleDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Dtos/CreateRoleDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Models/ApplicationUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CodeJournal/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CodeJournal/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/CodeJournal.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/CodeJournal.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/DataAccess/AuthDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/DataAccess/AuthDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Controllers/AuthController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Dtos/AddUserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Dtos/AddUserDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Dtos/LoginRequestDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Dtos/LoginRequestDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Dtos/RegisterRequestDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Dtos/RegisterRequestDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Repositories/IUserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Repositories/IUserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Repositories/UserRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Repositories/UserRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/Migrations/AuthDb/AuthDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/Migrations/AuthDb/AuthDbContextModelSnapshot.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CodeJournal.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/CodeJournal.Api.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/CodeJournal.Api.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/CodeJournal.Api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/CodeJournal.Api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/CodeJournal.Api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/CodeJournal.Api.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.CodeAnalysis.CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.CodeAnalysis.CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.CodeAnalysis.Workspaces.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.CodeAnalysis.Workspaces.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.CodeAnalysis.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.CodeAnalysis.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Design.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Design.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Microsoft.Win32.SystemEvents.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Mono.TextTemplating.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/Mono.TextTemplating.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.CodeDom.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.CodeDom.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Composition.AttributedModel.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Composition.AttributedModel.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Composition.Convention.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Composition.Convention.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Composition.Hosting.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Composition.Hosting.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Composition.Runtime.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Composition.Runtime.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Composition.TypedParts.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Composition.TypedParts.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Configuration.ConfigurationManager.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Configuration.ConfigurationManager.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Drawing.Common.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Security.Cryptography.ProtectedData.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Security.Cryptography.ProtectedData.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Security.Permissions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/System.Windows.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/cs/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/de/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/es/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/fr/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/it/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ja/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ko/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pl/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/pt-BR/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/runtimes/unix/lib/net6.0/System.Drawing.Common.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Drawing.Common.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Security.Cryptography.ProtectedData.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Windows.Extensions.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/CodeJournal.Api.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/CodeJournal.Api.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/CodeJournal.Api.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/CodeJournal.Api.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/CodeJournal.Api.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/CodeJournal.Api.csproj.nuget.g.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.GlobalUsings.g.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.GlobalUsings.g.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/CodeJournal.Api.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/ref/CodeJournal.Api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/ref/CodeJournal.Api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/refint/CodeJournal.Api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/Debug/net8.0/refint/CodeJournal.Api.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeJournal.Api/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/CodeJournal.Api/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +144,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Controllers/RolesController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Dtos/AddUserDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Dtos/AssignRoleDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Dtos/CreateRoleDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Models/ApplicationUser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e52a70dae11948fa5bfb33d03fd2e7d9b6ece182647aa4d9b1221413ac57dc7/IdentityUser.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -36,29 +160,32 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="34z14WK5Hkz3R5Y53So34J3LW5x" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.CodeJournal.Api: http (1).executor": "Run",
-    ".NET Launch Settings Profile.CodeJournal.Api: http.executor": "Run",
-    ".NET Launch Settings Profile.https.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.CodeJournal.Api: http (1).executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.CodeJournal.Api: http.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.https.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.https">
     <configuration name="CodeJournal.Api: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile" temporary="true">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/CodeJournal.Api/CodeJournal.Api.csproj" />
@@ -116,7 +243,13 @@
       <workItem from="1763047490464" duration="894000" />
       <workItem from="1763049073531" duration="6623000" />
       <workItem from="1764667478293" duration="609000" />
-      <workItem from="1766302110637" duration="32196000" />
+      <workItem from="1766302110637" duration="48840000" />
+      <workItem from="1767617278077" duration="2813000" />
+      <workItem from="1768317932155" duration="6784000" />
+      <workItem from="1768934583973" duration="5685000" />
+      <workItem from="1769018874869" duration="1046000" />
+      <workItem from="1769020347089" duration="832000" />
+      <workItem from="1769021194341" duration="2108000" />
     </task>
     <task id="LOCAL-00001" summary="add user functionality">
       <option name="closed" value="true" />
@@ -142,7 +275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766815270944</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="dockerfile added">
+      <option name="closed" value="true" />
+      <created>1767014557340</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1767014557340</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,7 +307,8 @@
     <MESSAGE value="add user functionality" />
     <MESSAGE value="saving" />
     <MESSAGE value="user management added and deleting functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="user management added and deleting functionality" />
+    <MESSAGE value="dockerfile added" />
+    <option name="LAST_COMMIT_MESSAGE" value="dockerfile added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -183,6 +325,32 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Controllers/RolesController.cs</url>
+          <line>26</line>
+          <properties documentPath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Controllers/RolesController.cs" containingFunctionPresentation="Method 'Create'">
+            <startOffsets>
+              <option value="884" />
+            </startOffsets>
+            <endOffsets>
+              <option value="885" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Controllers/RolesController.cs</url>
+          <line>27</line>
+          <properties documentPath="$PROJECT_DIR$/CodeJournal.Api/Domain/AccountManagement/Controllers/RolesController.cs" containingFunctionPresentation="Method 'Create'">
+            <startOffsets>
+              <option value="894" />
+            </startOffsets>
+            <endOffsets>
+              <option value="930" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

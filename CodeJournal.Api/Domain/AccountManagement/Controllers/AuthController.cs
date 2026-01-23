@@ -1,4 +1,5 @@
 using CodeJournal.Api.Domain.AccountManagement.Dtos;
+using CodeJournal.Api.Domain.AccountManagement.Models;
 using CodeJournal.Api.Domain.AccountManagement.Respositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -8,7 +9,7 @@ namespace CodeJournal.Api.Domain.AccountManagement.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AuthController(UserManager<IdentityUser> userManager, ITokenRepository tokenRepository) : ControllerBase
+public class AuthController(UserManager<ApplicationUser> userManager, ITokenRepository tokenRepository) : ControllerBase
 {
 
 
@@ -54,8 +55,10 @@ public class AuthController(UserManager<IdentityUser> userManager, ITokenReposit
     {
         //Create IdentityUser Object
 
-        var user = new IdentityUser()
+        var user = new ApplicationUser()
         {
+            FirstName = request.FirstName,
+            LastName = request.LastName,
             UserName = request.Email.Trim(),
             Email = request.Email.Trim(),
         };

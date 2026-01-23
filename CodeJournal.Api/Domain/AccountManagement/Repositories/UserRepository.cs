@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using CodeJournal.Api.DataAccess;
+using CodeJournal.Api.Domain.AccountManagement.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,14 +10,14 @@ namespace CodeJournal.Api.Domain.AccountManagement.Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly AuthDbContext authDbContext;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public UserRepository(AuthDbContext authDbContext, UserManager<IdentityUser> userManager)
+    public UserRepository(AuthDbContext authDbContext, UserManager<ApplicationUser> userManager)
     {
         this.authDbContext = authDbContext;
         _userManager = userManager;
     }
-    public async Task<IEnumerable<IdentityUser>> GetAllAsync()
+    public async Task<IEnumerable<ApplicationUser>> GetAllAsync()
     {
         var users = await authDbContext.Users.ToListAsync();
 
@@ -29,7 +30,7 @@ public class UserRepository : IUserRepository
         return users;
     }
 
-    public async Task<bool> Add(IdentityUser user, string password, List<string> roles)
+    public async Task<bool> Add(ApplicationUser user, string password, List<string> roles)
     {
        var identityResults= await _userManager.CreateAsync(user, password);
        if (identityResults.Succeeded)
