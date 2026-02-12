@@ -1,4 +1,5 @@
-using System;
+using System.Collections.Generic;
+using CodeJournal.Api.Domain.AccountManagement.Enums;
 using CodeJournal.Api.Domain.AccountManagement.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -10,72 +11,58 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
 {
     public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
     {
-
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        // Create Reader and Writer roles
 
+        // ---- ApplicationUser mappings (PostgreSQL friendly) ----
+        builder.Entity<ApplicationUser>(b =>
+        {
+            // Store enum as int in DB (portable across providers)
+            b.Property(x => x.Status)
+                .HasConversion<int>();
+
+            // Defaults for new rows
+            b.Property(x => x.CreatedAt)
+                .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
+
+            b.Property(x => x.IsBlocked)
+                .HasDefaultValue(false);
+
+            b.Property(x => x.WarningCount)
+                .HasDefaultValue(0);
+
+            // NOTE:
+            // Do NOT set HasDefaultValue(AccountStatus.Active) here unless you also configure a sentinel
+            // (otherwise EF warns because enum default 0 triggers DB default always).
+            // We’ll set Status explicitly in code when creating users.
+        });
+
+        // ---- Seed Roles (deterministic: safe for migrations) ----
         var readerRoleId = "3ef9235c-df3d-4d09-a54e-03adc9ed2283";
         var writerRoleId = "12a1d508-95f2-4fe2-a712-532fca8e5b9f";
 
         var roles = new List<IdentityRole>
         {
-            new IdentityRole(){
+            new IdentityRole
+            {
                 Id = readerRoleId,
                 Name = "Reader",
-                NormalizedName = "Reader".ToUpper(),
+                NormalizedName = "READER",
                 ConcurrencyStamp = readerRoleId
-
             },
-            new IdentityRole(){
+            new IdentityRole
+            {
                 Id = writerRoleId,
                 Name = "Writer",
-                NormalizedName = "Writer".ToUpper(),
-                ConcurrencyStamp = writerRoleId }
-        };
-
-
-        //seed the roles
-        builder.Entity<IdentityRole>().HasData(roles);
-
-        // Create a default admin user
-        var adminUserId = "dbbe523f-8929-44e0-b440-32ebd86f526d";
-
-        var admin = new ApplicationUser()
-        {
-            Id = adminUserId,
-            UserName = "admin@codejournalx.com",
-            NormalizedUserName = "admin@codejournalx.com".ToUpper(),
-            Email = "admin@codejournalx.com",
-            NormalizedEmail = "admin@codejournalx.com".ToUpper(),
-            
-            FirstName = "Admin",
-            LastName = "Admin",
-
-        };
-        admin.PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(admin, "Admin@123");
-
-        builder.Entity<ApplicationUser>().HasData(admin);
-
-        //give Roles to the admin user
-        var adminRoles = new List<IdentityUserRole<string>>()
-        {
-            new IdentityUserRole<string>()
-            {
-                UserId = adminUserId,
-                RoleId = readerRoleId
-            },
-            new IdentityUserRole<string>()
-            {
-                UserId = adminUserId,
-                RoleId = writerRoleId
+                NormalizedName = "WRITER",
+                ConcurrencyStamp = writerRoleId
             }
         };
+
+        builder.Entity<IdentityRole>().HasData(roles);
         
-        builder.Entity<IdentityUserRole<string>>().HasData(adminRoles);
     }
 }
- 

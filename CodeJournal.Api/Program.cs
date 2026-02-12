@@ -63,13 +63,14 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("CodeJournalConnectionString"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("BlogDb"));
 });
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("CodeJournalConnectionString"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("AuthDb"));
 });
+builder.Services.AddHostedService<AuthSeederHostedService>();
 
 
 var app = builder.Build();

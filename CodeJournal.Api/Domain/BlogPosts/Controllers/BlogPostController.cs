@@ -1,3 +1,4 @@
+using CodeJournal.Api.Domain.AccountManagement.Models;
 using CodeJournal.Api.Domain.BlogPosts.Dtos;
 using CodeJournal.Api.Domain.BlogPosts.Models;
 using CodeJournal.Api.Domain.BlogPosts.Repositories;
@@ -18,11 +19,11 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
         private readonly IBlogPostRepository _blogPostRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IBlogPostLikeRepository _blogPostLikeRepository;
-        private readonly SignInManager<IdentityUser> signInManager;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly IBlogPostCommentRepository blogPostCommentRepository;
 
-        public BlogPostController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository, IBlogPostLikeRepository blogPostLikeRepository, IBlogPostCommentRepository blogPostCommentRepository, UserManager<IdentityUser> userManager)
+        public BlogPostController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository, IBlogPostLikeRepository blogPostLikeRepository, IBlogPostCommentRepository blogPostCommentRepository, UserManager<ApplicationUser> userManager)
         {
             _blogPostRepository = blogPostRepository;
             _categoryRepository = categoryRepository;

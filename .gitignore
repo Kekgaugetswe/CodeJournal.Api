@@ -1,0 +1,19 @@
+## Build
+bin/
+obj/
+publish/
+
+## Rider / VS
+.idea/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Logs
+*.log
+
+## OS
+.DS_Store
+Thumbs.db
