@@ -97,10 +97,12 @@ app.MapScalarApiReference(options =>
     options.Theme = ScalarTheme.BluePlanet;
     options.DefaultHttpClient = new(ScalarTarget.CSharp, ScalarClient.RestSharp);
 });
-    
+
+app.UseRouting();
+
 if (app.Environment.IsDevelopment())
 {
-app.UseHttpsRedirection();
+    app.UseHttpsRedirection();
 }
 app.UseCors("WebClient");
 app.UseAuthentication();
