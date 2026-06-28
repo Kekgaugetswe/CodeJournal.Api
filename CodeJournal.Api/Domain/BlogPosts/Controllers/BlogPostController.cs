@@ -1,3 +1,4 @@
+using CodeJournal.Api.Common.Models;
 using CodeJournal.Api.Domain.AccountManagement.Models;
 using CodeJournal.Api.Domain.BlogPosts.Dtos;
 using CodeJournal.Api.Domain.BlogPosts.Models;
@@ -90,33 +91,55 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
 
         // GET: {apibaseurl}/api/blogpost
         [HttpGet]
-        public async Task<IActionResult> GetBlogPosts()
+        public async Task<IActionResult> GetBlogPosts([FromQuery] BlogPostFilterParameters filterParameters)
         {
-            var blogPosts = await _blogPostRepository.GetAllAsync();
+            // Input validation and normalization
+            if (filterParameters.PageNumber < 1)
+                filterParameters.PageNumber = 1;
 
+            if (filterParameters.PageSize < 1)
+                filterParameters.PageSize = 10;
 
-            var response = new List<BlogPostDto>();
-            foreach (var blogPost in blogPosts)
+            if (filterParameters.PageSize > 100)
+                filterParameters.PageSize = 100;
+
+            // Validate categoryId if provided as a raw query string value
+            if (Request.Query.ContainsKey("categoryId"))
             {
-                response.Add(new BlogPostDto()
+                var categoryIdValue = Request.Query["categoryId"].ToString();
+                if (!Guid.TryParse(categoryIdValue, out _))
                 {
-                    Id = blogPost.Id,
-                    Title = blogPost.Title,
-                    ShortDescription = blogPost.ShortDescription,
-                    Content = blogPost.Content,
-                    FeaturedImageUrl = blogPost.FeaturedImageUrl,
-                    UrlHandle = blogPost.UrlHandle,
-                    PublishedDate = blogPost.PublishedDate,
-                    Author = blogPost.Author,
-                    IsVisible = blogPost.IsVisible,
-                    Categories = blogPost.Categories.Select(x => new CategoryDto
-                    {
-                        Id = x.Id,
-                        Name = x.Name,
-                        UrlHandle = x.UrlHandle
-                    }).ToList()
-                });
+                    return BadRequest(ApiResponse<List<BlogPostDto>>.ErrorResponse("categoryId must be a valid GUID."));
+                }
             }
+
+            var pagedResult = await _blogPostRepository.GetPagedAsync(filterParameters);
+
+            var blogPostDtos = pagedResult.Items.Select(blogPost => new BlogPostDto
+            {
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                ShortDescription = blogPost.ShortDescription,
+                Content = blogPost.Content,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                UrlHandle = blogPost.UrlHandle,
+                PublishedDate = blogPost.PublishedDate,
+                Author = blogPost.Author,
+                IsVisible = blogPost.IsVisible,
+                Categories = blogPost.Categories.Select(x => new CategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle
+                }).ToList()
+            }).ToList();
+
+            var paginationMetadata = new PaginationMetadata(
+                filterParameters.PageNumber,
+                filterParameters.PageSize,
+                pagedResult.TotalCount);
+
+            var response = ApiResponse<List<BlogPostDto>>.SuccessResponse(blogPostDtos, paginationMetadata);
 
             return Ok(response);
         }
@@ -328,7 +351,6 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
             };
 
             return Ok(response);
-
 
 
         }

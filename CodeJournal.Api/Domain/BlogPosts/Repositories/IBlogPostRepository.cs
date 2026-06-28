@@ -1,4 +1,6 @@
 using System;
+using CodeJournal.Api.Common.Models;
+using CodeJournal.Api.Domain.BlogPosts.Dtos;
 using CodeJournal.Api.Domain.BlogPosts.Models;
 
 namespace CodeJournal.Api.Domain.BlogPosts.Repositories;
@@ -7,6 +9,7 @@ public interface IBlogPostRepository
 {
     Task<BlogPost> CreateAsync(BlogPost blogPost);
     Task<IEnumerable<BlogPost>> GetAllAsync();
+    Task<PagedResult<BlogPost>> GetPagedAsync(BlogPostFilterParameters filterParameters);
 
     Task<BlogPost?> GetByIdAsync(Guid id);
 
@@ -15,7 +18,4 @@ public interface IBlogPostRepository
     Task<BlogPost?> UdpateAsync(BlogPost blogPost);
 
     Task<BlogPost?> DeleteAsync(Guid id);
-    
-
-
 }

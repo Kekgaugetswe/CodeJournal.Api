@@ -11,7 +11,6 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
 {
     [HttpPost]
     [Authorize(Roles = "Writer")]
-    [Route("Add")]
     public async Task<IActionResult> CreateCategory(CreateCategoryRequestDto request)
     {
         // map dto to domain model 

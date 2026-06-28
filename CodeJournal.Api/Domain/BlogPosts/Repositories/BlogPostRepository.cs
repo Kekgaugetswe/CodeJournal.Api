@@ -1,5 +1,7 @@
 using System;
+using CodeJournal.Api.Common.Models;
 using CodeJournal.Api.DataAccess;
+using CodeJournal.Api.Domain.BlogPosts.Dtos;
 using CodeJournal.Api.Domain.BlogPosts.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Update.Internal;
@@ -70,6 +72,50 @@ public class BlogPostRepository : IBlogPostRepository
         await context.SaveChangesAsync();
         return blogPost;
 
+    }
+
+    public async Task<PagedResult<BlogPost>> GetPagedAsync(BlogPostFilterParameters filterParameters)
+    {
+        var query = context.BlogPosts.Include(x => x.Categories).AsQueryable();
+
+        // Apply filters
+        if (!string.IsNullOrWhiteSpace(filterParameters.Title))
+        {
+            query = query.Where(x => EF.Functions.ILike(x.Title, $"%{filterParameters.Title}%"));
+        }
+
+        if (!string.IsNullOrWhiteSpace(filterParameters.Author))
+        {
+            query = query.Where(x => EF.Functions.ILike(x.Author, filterParameters.Author));
+        }
+
+        if (filterParameters.CategoryId.HasValue)
+        {
+            query = query.Where(x => x.Categories.Any(c => c.Id == filterParameters.CategoryId.Value));
+        }
+
+        if (filterParameters.IsVisible.HasValue)
+        {
+            query = query.Where(x => x.IsVisible == filterParameters.IsVisible.Value);
+        }
+
+        // Default ordering: PublishedDate descending
+        query = query.OrderByDescending(x => x.PublishedDate);
+
+        // Get total count before pagination
+        var totalCount = await query.CountAsync();
+
+        // Apply pagination
+        var items = await query
+            .Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize)
+            .Take(filterParameters.PageSize)
+            .ToListAsync();
+
+        return new PagedResult<BlogPost>
+        {
+            Items = items,
+            TotalCount = totalCount
+        };
     }
 
 }

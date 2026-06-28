@@ -10,15 +10,8 @@ namespace CodeJournal.Api.Domain.AccountManagement.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController(IUserRepository userRepository) : ControllerBase
     {
-        private readonly IUserRepository userRepository;
-
-        public UserController(IUserRepository userRepository)
-        {
-            this.userRepository = userRepository;
-        }
-
         [HttpGet]
         [Route("users")]
         public async Task<IActionResult> GetAll()

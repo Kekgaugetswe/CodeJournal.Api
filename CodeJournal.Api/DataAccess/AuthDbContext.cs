@@ -9,6 +9,8 @@ namespace CodeJournal.Api.DataAccess;
 
 public class AuthDbContext : IdentityDbContext<ApplicationUser>
 {
+    public DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
+
     public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
     {
     }
@@ -38,6 +40,41 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
             // Do NOT set HasDefaultValue(AccountStatus.Active) here unless you also configure a sentinel
             // (otherwise EF warns because enum default 0 triggers DB default always).
             // We’ll set Status explicitly in code when creating users.
+        });
+
+        // ---- RefreshToken entity configuration ----
+        builder.Entity<RefreshToken>(b =>
+        {
+            b.HasKey(rt => rt.Id);
+
+            b.Property(rt => rt.Id)
+                .ValueGeneratedOnAdd();
+
+            b.Property(rt => rt.UserId)
+                .IsRequired()
+                .HasMaxLength(450);
+
+            b.Property(rt => rt.TokenHash)
+                .IsRequired()
+                .HasMaxLength(128);
+
+            b.Property(rt => rt.ExpiresAt)
+                .IsRequired();
+
+            b.Property(rt => rt.CreatedAt)
+                .IsRequired()
+                .HasDefaultValueSql("NOW() AT TIME ZONE 'UTC'");
+
+            b.Property(rt => rt.IsRevoked)
+                .IsRequired()
+                .HasDefaultValue(false);
+
+            b.HasIndex(rt => rt.TokenHash);
+
+            b.HasOne(rt => rt.User)
+                .WithMany()
+                .HasForeignKey(rt => rt.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
 
         // ---- Seed Roles (deterministic: safe for migrations) ----
