@@ -47,6 +47,7 @@ builder.Services.AddCors(options =>
             .WithOrigins(
                 "https://codejournalx.com",
                 "http://codejournalx.com",
+                "https://www.codejournalx.com",
                 "http://129.151.186.216:4200",
                 "http://localhost:4200",
                 "https://localhost:4200"
