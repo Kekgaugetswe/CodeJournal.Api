@@ -45,6 +45,8 @@ builder.Services.AddCors(options =>
     {
         policy
             .WithOrigins(
+                "https://codejournalx.com",
+                "http://codejournalx.com",
                 "http://129.151.186.216:4200",
                 "http://localhost:4200",
                 "https://localhost:4200"
@@ -100,11 +102,7 @@ app.MapScalarApiReference(options =>
 
 app.UseRouting();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseHttpsRedirection();
-}
-app.UseCors("WebClient");
+app.UseHttpsRedirection();app.UseCors("WebClient");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles(new StaticFileOptions
