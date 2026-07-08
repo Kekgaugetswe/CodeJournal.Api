@@ -3,6 +3,7 @@ using CodeJournal.Api.DataAccess;
 using CodeJournal.Api.Domain.AccountManagement.Models;
 using CodeJournal.Api.Domain.AccountManagement.Repositories;
 using CodeJournal.Api.Domain.AccountManagement.Respositories;
+using CodeJournal.Api.Domain.AccountManagement.Services;
 using CodeJournal.Api.Domain.BlogPosts.Repositories;
 using CodeJournal.Api.Domain.Categories.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
+using Resend;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +25,13 @@ builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IBlogPostLikeRepository, BlogPostLikeRepository>();
 builder.Services.AddScoped<IBlogPostCommentRepository, BlogPostCommentRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IEmailService, ResendEmailService>();
+builder.Services.AddOptions();
+builder.Services.AddHttpClient<ResendClient>();
+builder.Services.Configure<ResendClientOptions>(o =>
+{
+    o.ApiToken = builder.Configuration["Email:ResendApiKey"]!;
+});
 
 builder.Services.AddIdentityCore<ApplicationUser>()
 .AddRoles<IdentityRole>()
@@ -88,6 +97,7 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("AuthDb"));
 });
 builder.Services.AddHostedService<AuthSeederHostedService>();
+builder.Services.AddHostedService<UnconfirmedUserCleanupService>();
 
 
 var app = builder.Build();

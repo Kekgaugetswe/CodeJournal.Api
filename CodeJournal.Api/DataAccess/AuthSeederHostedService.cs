@@ -48,6 +48,7 @@ public sealed class AuthSeederHostedService : IHostedService
             {
                 UserName = adminEmail,
                 Email = adminEmail,
+                EmailConfirmed = true,
                 FirstName = "Admin",
                 LastName = "Admin",
                 DisplayName = "Admin",
@@ -60,6 +61,12 @@ public sealed class AuthSeederHostedService : IHostedService
             var result = await userManager.CreateAsync(admin, adminPassword);
             if (!result.Succeeded)
                 throw new Exception("Failed to create admin: " + string.Join(", ", result.Errors.Select(e => e.Description)));
+        }
+        else if (!admin.EmailConfirmed)
+        {
+            // Ensure existing admin has email confirmed for login
+            admin.EmailConfirmed = true;
+            await userManager.UpdateAsync(admin);
         }
 
         foreach (var role in roles)
