@@ -113,7 +113,8 @@ app.MapScalarApiReference(options =>
 
 app.UseRouting();
 
-app.UseHttpsRedirection();app.UseCors("WebClient");
+app.UseHttpsRedirection();
+app.UseCors("WebClient");
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseStaticFiles(new StaticFileOptions
