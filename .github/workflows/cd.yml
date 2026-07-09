@@ -1,0 +1,42 @@
+name: CD (API)
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy API to Oracle VM
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Deploy to Oracle VM
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /opt/codejournal
+            docker compose pull api
+            docker compose up -d api
+            docker image prune -f
+
+  health-check:
+    name: Health Check API
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wait for application to start
+        run: sleep 20
+
+      - name: Verify CodeJournal API
+        run: |
+          curl --fail --silent --show-error https://api.codejournalx.com/health
