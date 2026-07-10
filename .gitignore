@@ -17,3 +17,6 @@ publish/
 ## OS
 .DS_Store
 Thumbs.db
+
+## Kiro
+.kiro/
