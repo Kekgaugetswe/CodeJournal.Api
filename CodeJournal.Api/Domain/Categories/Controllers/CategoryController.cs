@@ -1,13 +1,15 @@
+using CodeJournal.Api.DataAccess;
 using CodeJournal.Api.Domain.Categories.Dtos;
 using CodeJournal.Api.Domain.Categories.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeJournal.Api.Domain.Categories.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CategoryController(ICategoryRepository repository) : ControllerBase
+public class CategoryController(ICategoryRepository repository, ApplicationDbContext context) : ControllerBase
 {
     [HttpPost]
     [Authorize(Roles = "Writer")]
@@ -30,26 +32,46 @@ public class CategoryController(ICategoryRepository repository) : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetCategory([FromQuery] string? query, [FromQuery] string? sortBy, [FromQuery] string? sortDirection, [FromQuery] int? pageNumber, [FromQuery] int? pageSize)
     {
-        var categories = await repository.GetAllAsync(query, sortBy, sortDirection, pageNumber, pageSize);
+        var categories = context.Categories.AsQueryable();
 
-        //map domain model to Dto
-
-        var response = new List<CategoryDto>();
-
-        foreach (var category in categories)
+        // Filtering
+        if (!string.IsNullOrWhiteSpace(query))
         {
-
-            response.Add(new CategoryDto
-            {
-                Id = category.Id,
-                Name = category.Name,
-                UrlHandle = category.UrlHandle
-            });
-
+            categories = categories.Where(x => x.Name.Contains(query));
         }
 
-        return Ok(response);
+        // Sorting
+        if (!string.IsNullOrWhiteSpace(sortBy))
+        {
+            if (sortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+            {
+                var isAsc = string.Equals(sortDirection, "asc", StringComparison.OrdinalIgnoreCase);
+                categories = isAsc ? categories.OrderBy(x => x.Name) : categories.OrderByDescending(x => x.Name);
+            }
+            else if (sortBy.Equals("URL", StringComparison.OrdinalIgnoreCase))
+            {
+                var isAsc = string.Equals(sortDirection, "asc", StringComparison.OrdinalIgnoreCase);
+                categories = isAsc ? categories.OrderBy(x => x.UrlHandle) : categories.OrderByDescending(x => x.UrlHandle);
+            }
+        }
 
+        // Pagination
+        var skipResults = ((pageNumber ?? 1) - 1) * (pageSize ?? 100);
+        categories = categories.Skip(skipResults).Take(pageSize ?? 100);
+
+        // Projection query to get article count without loading full BlogPost entities
+        var response = await categories
+            .Select(c => new CategoryDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                UrlHandle = c.UrlHandle,
+                Description = c.Description,
+                ArticleCount = c.BlogPosts.Count(bp => bp.IsVisible)
+            })
+            .ToListAsync();
+
+        return Ok(response);
     }
 
     //Get: https:/localhost:7180/api/category/{id}
