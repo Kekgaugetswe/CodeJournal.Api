@@ -120,9 +120,21 @@ namespace CodeJournal.Api.DataAccess.Migrations.Blog
                     b.Property<DateTimeOffset>("DateAdded")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("DeletedByUserId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid?>("ParentCommentId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -130,6 +142,8 @@ namespace CodeJournal.Api.DataAccess.Migrations.Blog
                     b.HasKey("Id");
 
                     b.HasIndex("BlogPostId");
+
+                    b.HasIndex("ParentCommentId");
 
                     b.ToTable("BlogPostComment");
                 });
@@ -156,6 +170,29 @@ namespace CodeJournal.Api.DataAccess.Migrations.Blog
                         .IsUnique();
 
                     b.ToTable("BlogPostLike");
+                });
+
+            modelBuilder.Entity("CodeJournal.Api.Domain.BlogPosts.Models.CommentLike", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CommentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId", "UserId")
+                        .IsUnique();
+
+                    b.ToTable("CommentLikes");
                 });
 
             modelBuilder.Entity("CodeJournal.Api.Domain.Categories.Category", b =>
@@ -202,6 +239,13 @@ namespace CodeJournal.Api.DataAccess.Migrations.Blog
                         .HasForeignKey("BlogPostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("CodeJournal.Api.Domain.BlogPosts.Models.BlogPostComment", "ParentComment")
+                        .WithMany("Replies")
+                        .HasForeignKey("ParentCommentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("ParentComment");
                 });
 
             modelBuilder.Entity("CodeJournal.Api.Domain.BlogPosts.Models.BlogPostLike", b =>
@@ -215,11 +259,29 @@ namespace CodeJournal.Api.DataAccess.Migrations.Blog
                     b.Navigation("BlogPost");
                 });
 
+            modelBuilder.Entity("CodeJournal.Api.Domain.BlogPosts.Models.CommentLike", b =>
+                {
+                    b.HasOne("CodeJournal.Api.Domain.BlogPosts.Models.BlogPostComment", "Comment")
+                        .WithMany("Likes")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+                });
+
             modelBuilder.Entity("CodeJournal.Api.Domain.BlogPosts.Models.BlogPost", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");
+                });
+
+            modelBuilder.Entity("CodeJournal.Api.Domain.BlogPosts.Models.BlogPostComment", b =>
+                {
+                    b.Navigation("Likes");
+
+                    b.Navigation("Replies");
                 });
 #pragma warning restore 612, 618
         }

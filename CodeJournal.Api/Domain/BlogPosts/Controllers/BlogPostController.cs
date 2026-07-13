@@ -237,18 +237,61 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
         {
             var comments = await blogPostCommentRepository.GetAllAsync(blogPostId);
 
+            // Get current user if authenticated
+            Guid? currentUserId = null;
+            bool isWriter = false;
+            var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            if (!string.IsNullOrEmpty(userIdClaim) && Guid.TryParse(userIdClaim, out var parsedUserId))
+            {
+                currentUserId = parsedUserId;
+                isWriter = User.IsInRole("Writer");
+            }
+
             var response = new List<BlogCommentDto>();
 
             foreach (var comment in comments)
             {
                 var user = await userManager.FindByIdAsync(comment.UserId.ToString());
 
-                response.Add(new BlogCommentDto
+                var commentDto = new BlogCommentDto
                 {
-                    Description = comment.Description,
+                    Id = comment.Id,
+                    Description = comment.IsDeleted ? "[This comment has been deleted]" : comment.Description,
                     DateAdded = comment.DateAdded,
-                    UserName = user?.UserName ?? "Unknown"
-                });
+                    UserName = user?.UserName ?? "Unknown",
+                    ParentCommentId = comment.ParentCommentId,
+                    ReplyCount = comment.Replies?.Count(r => !r.IsDeleted) ?? 0,
+                    Replies = new List<BlogCommentDto>(),
+                    IsDeleted = comment.IsDeleted,
+                    LikeCount = comment.Likes?.Count ?? 0,
+                    IsLikedByCurrentUser = currentUserId.HasValue && (comment.Likes?.Any(l => l.UserId == currentUserId.Value) ?? false),
+                    CanDelete = currentUserId.HasValue && (comment.UserId == currentUserId.Value || isWriter)
+                };
+
+                // Map replies
+                if (comment.Replies != null)
+                {
+                    foreach (var reply in comment.Replies.OrderBy(r => r.DateAdded))
+                    {
+                        var replyUser = await userManager.FindByIdAsync(reply.UserId.ToString());
+                        commentDto.Replies.Add(new BlogCommentDto
+                        {
+                            Id = reply.Id,
+                            Description = reply.IsDeleted ? "[This comment has been deleted]" : reply.Description,
+                            DateAdded = reply.DateAdded,
+                            UserName = replyUser?.UserName ?? "Unknown",
+                            ParentCommentId = reply.ParentCommentId,
+                            ReplyCount = 0,
+                            Replies = new List<BlogCommentDto>(),
+                            IsDeleted = reply.IsDeleted,
+                            LikeCount = reply.Likes?.Count ?? 0,
+                            IsLikedByCurrentUser = currentUserId.HasValue && (reply.Likes?.Any(l => l.UserId == currentUserId.Value) ?? false),
+                            CanDelete = currentUserId.HasValue && (reply.UserId == currentUserId.Value || isWriter)
+                        });
+                    }
+                }
+
+                response.Add(commentDto);
             }
 
             return Ok(response);
@@ -363,14 +406,23 @@ namespace CodeJournal.Api.Domain.BlogPosts.Controllers
             if (request == null || request.BlogPostId == Guid.Empty)
                 return BadRequest("Invalid comment data.");
 
+            // Validate parent comment if replying
+            if (request.ParentCommentId.HasValue)
+            {
+                var parentComment = await blogPostCommentRepository.GetByIdAsync(request.ParentCommentId.Value);
+                if (parentComment == null)
+                    return BadRequest("Parent comment not found.");
+                if (parentComment.BlogPostId != request.BlogPostId)
+                    return BadRequest("Parent comment does not belong to the same blog post.");
+            }
 
             var comment = new BlogPostComment()
             {
                 BlogPostId = request.BlogPostId,
                 UserId = request.UserId,
                 Description = request.Description,
-                DateAdded = DateTimeOffset.UtcNow
-
+                DateAdded = DateTimeOffset.UtcNow,
+                ParentCommentId = request.ParentCommentId
             };
             var createdComment = await blogPostCommentRepository.AddAsync(comment);
             var response = new BlogPostCommentDto

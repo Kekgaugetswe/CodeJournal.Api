@@ -15,6 +15,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<BlogImage> BlogImages { get; set; }
     public DbSet<BlogPostLike> BlogPostLike { get; set; }
     public DbSet<BlogPostComment> BlogPostComment { get; set; }
+    public DbSet<CommentLike> CommentLikes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -28,6 +29,24 @@ public class ApplicationDbContext : DbContext
                 .HasOne(l => l.BlogPost)
                 .WithMany(p => p.Likes)
                 .HasForeignKey(l => l.BlogPostId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+        // Comment reply self-referencing relationship
+        modelBuilder.Entity<BlogPostComment>()
+                .HasOne(c => c.ParentComment)
+                .WithMany(c => c.Replies)
+                .HasForeignKey(c => c.ParentCommentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+        // Comment likes
+        modelBuilder.Entity<CommentLike>()
+                .HasIndex(x => new { x.CommentId, x.UserId })
+                .IsUnique();
+
+        modelBuilder.Entity<CommentLike>()
+                .HasOne(x => x.Comment)
+                .WithMany(x => x.Likes)
+                .HasForeignKey(x => x.CommentId)
                 .OnDelete(DeleteBehavior.Cascade);
     }
 

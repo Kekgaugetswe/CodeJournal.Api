@@ -23,6 +23,18 @@ public class BlogPostCommentRepository : IBlogPostCommentRepository
 
     public async Task<IEnumerable<BlogPostComment>> GetAllAsync(Guid blogPostId)
     {
-        return await dbContext.BlogPostComment.OrderByDescending(c=> c.DateAdded).Where(x => x.BlogPostId == blogPostId).ToListAsync();
+        // Return only top-level comments with their replies and likes loaded
+        return await dbContext.BlogPostComment
+            .Where(x => x.BlogPostId == blogPostId && x.ParentCommentId == null)
+            .Include(x => x.Likes)
+            .Include(x => x.Replies)
+                .ThenInclude(r => r.Likes)
+            .OrderByDescending(c => c.DateAdded)
+            .ToListAsync();
+    }
+
+    public async Task<BlogPostComment?> GetByIdAsync(Guid id)
+    {
+        return await dbContext.BlogPostComment.FindAsync(id);
     }
 }
