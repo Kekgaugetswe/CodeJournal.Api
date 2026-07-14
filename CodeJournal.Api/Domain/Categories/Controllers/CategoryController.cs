@@ -20,7 +20,8 @@ public class CategoryController(ICategoryRepository repository, ApplicationDbCon
         var category = new Category()
         {
             Name = request.Name,
-            UrlHandle = request.UrlHandle
+            UrlHandle = request.UrlHandle,
+            AccentColor = request.AccentColor
         };
 
         var response = await repository.CreateCategoryAsync(category);
@@ -67,6 +68,7 @@ public class CategoryController(ICategoryRepository repository, ApplicationDbCon
                 Name = c.Name,
                 UrlHandle = c.UrlHandle,
                 Description = c.Description,
+                AccentColor = c.AccentColor,
                 ArticleCount = c.BlogPosts.Count(bp => bp.IsVisible)
             })
             .ToListAsync();
@@ -92,7 +94,9 @@ public class CategoryController(ICategoryRepository repository, ApplicationDbCon
         {
             Id = existingCategory.Id,
             Name = existingCategory.Name,
-            UrlHandle = existingCategory.UrlHandle
+            UrlHandle = existingCategory.UrlHandle,
+            Description = existingCategory.Description,
+            AccentColor = existingCategory.AccentColor
         };
 
         return Ok(response);
@@ -110,7 +114,8 @@ public class CategoryController(ICategoryRepository repository, ApplicationDbCon
         {
             Id = id,
             Name = request.Name,
-            UrlHandle = request.UrlHandle
+            UrlHandle = request.UrlHandle,
+            AccentColor = request.AccentColor
         };
         category = await repository.UpdateAsync(category);
 
@@ -123,7 +128,8 @@ public class CategoryController(ICategoryRepository repository, ApplicationDbCon
         {
             Id = category.Id,
             Name = category.Name,
-            UrlHandle = category.UrlHandle
+            UrlHandle = category.UrlHandle,
+            AccentColor = category.AccentColor
         };
         return Ok(response);
 
@@ -148,7 +154,8 @@ public class CategoryController(ICategoryRepository repository, ApplicationDbCon
         {
             Id = existingCategory.Id,
             Name = existingCategory.Name,
-            UrlHandle = existingCategory.UrlHandle
+            UrlHandle = existingCategory.UrlHandle,
+            AccentColor = existingCategory.AccentColor
         };
 
         return Ok(response);

@@ -99,8 +99,23 @@ public class BlogPostRepository : IBlogPostRepository
             query = query.Where(x => x.IsVisible == filterParameters.IsVisible.Value);
         }
 
-        // Default ordering: PublishedDate descending
-        query = query.OrderByDescending(x => x.PublishedDate);
+        // Sorting
+        if (!string.IsNullOrWhiteSpace(filterParameters.SortBy))
+        {
+            var isAsc = string.Equals(filterParameters.SortDirection, "asc", StringComparison.OrdinalIgnoreCase);
+            query = filterParameters.SortBy.ToLower() switch
+            {
+                "title" => isAsc ? query.OrderBy(x => x.Title) : query.OrderByDescending(x => x.Title),
+                "author" => isAsc ? query.OrderBy(x => x.Author) : query.OrderByDescending(x => x.Author),
+                "date" or "publisheddate" => isAsc ? query.OrderBy(x => x.PublishedDate) : query.OrderByDescending(x => x.PublishedDate),
+                _ => query.OrderByDescending(x => x.PublishedDate)
+            };
+        }
+        else
+        {
+            // Default ordering: PublishedDate descending (latest first)
+            query = query.OrderByDescending(x => x.PublishedDate);
+        }
 
         // Get total count before pagination
         var totalCount = await query.CountAsync();

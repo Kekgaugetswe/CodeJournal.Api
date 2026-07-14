@@ -201,6 +201,9 @@ namespace CodeJournal.Api.DataAccess.Migrations.Blog
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("AccentColor")
+                        .HasColumnType("text");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 

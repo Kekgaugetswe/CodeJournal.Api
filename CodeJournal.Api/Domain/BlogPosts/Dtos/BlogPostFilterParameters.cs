@@ -8,4 +8,6 @@ public class BlogPostFilterParameters
     public string? Author { get; set; }
     public Guid? CategoryId { get; set; }
     public bool? IsVisible { get; set; }
+    public string? SortBy { get; set; }
+    public string? SortDirection { get; set; }
 }
