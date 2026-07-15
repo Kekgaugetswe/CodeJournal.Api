@@ -55,6 +55,11 @@ public class CategoryController(ICategoryRepository repository, ApplicationDbCon
                 categories = isAsc ? categories.OrderBy(x => x.UrlHandle) : categories.OrderByDescending(x => x.UrlHandle);
             }
         }
+        else
+        {
+            // Default: alphabetical by name
+            categories = categories.OrderBy(x => x.Name);
+        }
 
         // Pagination
         var skipResults = ((pageNumber ?? 1) - 1) * (pageSize ?? 100);
